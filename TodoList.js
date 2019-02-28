@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Button, Keyboard } from 'react-native';
 import { observer } from 'mobx-react';
 
 @observer
 export default class TodoList extends Component {
     onFilterChange = value => {
         this.props.store.filter = value
+    }
+
+    onSearchPress = () => {
+        if (this.props.store.searchVisible) {
+            this.props.store.searchVisible = false;
+            Keyboard.dismiss();
+        } else {
+            this.props.store.searchVisible = true;
+        }
     }
 
     render() {
@@ -15,17 +24,19 @@ export default class TodoList extends Component {
             filteredTodos,
             newTodo,
             searchVisible,
-            toggleSearch
         } = this.props.store;
 
         return <View style={styles.container}>
-            <Text
-                style={styles.searchButton}
-                onPress={toggleSearch}
-            >{searchVisible ? "Close" : "Search"}</Text>
+            <View style={styles.header}>
             <Text style={styles.welcome}>
                 Todos
             </Text>
+            <Button
+                style={styles.searchButton}
+                title={searchVisible ? "Close" : "Search"}
+                onPress={this.onSearchPress}
+            />
+            </View>
             {searchVisible ? <TextInput
                 onChangeText={this.onFilterChange}
                 value={filter}
@@ -54,14 +65,7 @@ const styles = {
         backgroundColor: '#F5FCFF',
     },
     searchButton: {
-        fontSize: 16,
-        margin: 20,
-        marginBottom: 10,
-        paddingVertical: 20,
-        color: '#333333',
-        position: "absolute",
-        top: 0,
-        right: 0
+        backgroundColor: "red"
     },
     welcome: {
         fontSize: 28,
@@ -92,6 +96,11 @@ const styles = {
         borderRadius: 5,
         fontSize: 18,
         color: '#777777',
+    },
+    header: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center"
     }
 };
 

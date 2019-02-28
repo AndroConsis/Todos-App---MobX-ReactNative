@@ -17,12 +17,6 @@ class TodoStore {
             this.newTodo = "";
         }
     }
-
-    @action toggleSearch = () => {
-        console.log(this.searchVisible);
-        this.searchVisible = !this.searchVisible;
-    }
-
 }
 
 export default new TodoStore;
