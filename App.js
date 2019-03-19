@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
-import TodoList from './TodoList';
-import store from './TodoStore';
+import { Navigation } from 'react-native-navigation';
+import { registerScreens } from './src/ui';
 
-export default class App extends Component {
-  render() {
-    return <TodoList store={store}/>
-  }
-}
+registerScreens();
+
+Navigation.events().registerAppLaunchedListener(() => {
+  Navigation.setRoot({
+    root: {
+      component: {
+        name: 'Initializing'
+      }
+    },
+  });
+});

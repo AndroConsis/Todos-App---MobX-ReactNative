@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, Button, Keyboard } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Button, Keyboard, ScrollView } from 'react-native';
 import { observer } from 'mobx-react';
 
 @observer
@@ -38,6 +38,7 @@ export default class TodoList extends Component {
             />
             </View>
             {searchVisible ? <TextInput
+                ref={ref => {this.refs["searchInput"] = ref}}
                 onChangeText={this.onFilterChange}
                 value={filter}
                 style={styles.input}
@@ -52,9 +53,11 @@ export default class TodoList extends Component {
                     style={styles.input}
                     placeholder={"add new todo"}
                 />}
-            {filteredTodos.map(item => <View style={styles.listItem}>
-                <Text style={styles.instructions}>{item}</Text>
-            </View>)}
+            <ScrollView>
+                {filteredTodos.map(item => <View style={styles.listItem}>
+                    <Text style={styles.instructions}>{item}</Text>
+                </View>)}
+            </ScrollView>
         </View >
     }
 }

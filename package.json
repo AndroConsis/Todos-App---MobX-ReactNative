@@ -11,7 +11,8 @@
     "mobx-react": "^5.4.3",
     "mobx-state-tree": "^3.10.2",
     "react": "16.6.3",
-    "react-native": "0.58.5"
+    "react-native": "0.58.5",
+    "react-native-navigation": "^2.13.1"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.3.0",
